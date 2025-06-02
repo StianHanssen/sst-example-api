@@ -1,17 +1,17 @@
-import { Logger } from '@aws-lambda-powertools/logger';
-import { injectLambdaContext } from '@aws-lambda-powertools/logger/middleware';
-import { Metrics } from '@aws-lambda-powertools/metrics';
-import { logMetrics } from '@aws-lambda-powertools/metrics/middleware';
-import { Tracer } from '@aws-lambda-powertools/tracer';
-import { captureLambdaHandler } from '@aws-lambda-powertools/tracer/middleware';
-import middy from '@middy/core';
+import { Logger } from "@aws-lambda-powertools/logger";
+import { injectLambdaContext } from "@aws-lambda-powertools/logger/middleware";
+import { Metrics } from "@aws-lambda-powertools/metrics";
+import { logMetrics } from "@aws-lambda-powertools/metrics/middleware";
+import { Tracer } from "@aws-lambda-powertools/tracer";
+import { captureLambdaHandler } from "@aws-lambda-powertools/tracer/middleware";
+import middy from "@middy/core";
 
 const logger = new Logger();
 const tracer = new Tracer();
 const metrics = new Metrics();
 
 async function handlerLogic(event: any) {
-  logger.info('Serving RapiDoc UI');
+  logger.info("Serving RapiDoc UI");
 
   // Get the API URL from the request
   const apiUrl = `https://${event.requestContext.domainName}`;
@@ -40,8 +40,8 @@ async function handlerLogic(event: any) {
   return {
     statusCode: 200,
     headers: {
-      'Content-Type': 'text/html',
-      'Access-Control-Allow-Origin': '*',
+      "Content-Type": "text/html",
+      "Access-Control-Allow-Origin": "*",
     },
     body: html,
   };

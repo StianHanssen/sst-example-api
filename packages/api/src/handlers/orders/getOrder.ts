@@ -1,38 +1,38 @@
-import { Logger } from '@aws-lambda-powertools/logger';
-import { parser } from '@aws-lambda-powertools/parser/middleware';
-import { injectLambdaContext } from '@aws-lambda-powertools/logger/middleware';
-import { Metrics } from '@aws-lambda-powertools/metrics';
-import { logMetrics } from '@aws-lambda-powertools/metrics/middleware';
-import { Tracer } from '@aws-lambda-powertools/tracer';
-import { captureLambdaHandler } from '@aws-lambda-powertools/tracer/middleware';
-import middy from '@middy/core';
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
+import { Logger } from "@aws-lambda-powertools/logger";
+import { injectLambdaContext } from "@aws-lambda-powertools/logger/middleware";
+import { Metrics } from "@aws-lambda-powertools/metrics";
+import { logMetrics } from "@aws-lambda-powertools/metrics/middleware";
+import { parser } from "@aws-lambda-powertools/parser/middleware";
+import { Tracer } from "@aws-lambda-powertools/tracer";
+import { captureLambdaHandler } from "@aws-lambda-powertools/tracer/middleware";
+import middy from "@middy/core";
 
 import {
-  getOrderSchema,
-  getOrderEventSchema,
-  getOrderResponseSchema,
-  getOrderResponseContentSchema,
   type GetOrderEvent,
+  getOrderEventSchema,
   type GetOrderResponse,
-} from '../../schemas/orderSchemas';
+  getOrderResponseContentSchema,
+  getOrderResponseSchema,
+  getOrderSchema,
+} from "../../schemas/orderSchemas";
 
 const logger = new Logger();
 const tracer = new Tracer();
 const metrics = new Metrics();
 
 export const getOrderRoute: RouteConfig = {
-  method: 'get',
-  path: '/orders/{id}',
-  summary: 'Get an existing order',
+  method: "get",
+  path: "/orders/{id}",
+  summary: "Get an existing order",
   request: {
     params: getOrderSchema,
   },
   responses: {
     200: {
-      description: 'Order retrieved successfully',
+      description: "Order retrieved successfully",
       content: {
-        'application/json': {
+        "application/json": {
           schema: getOrderResponseContentSchema,
         },
       },
@@ -42,7 +42,7 @@ export const getOrderRoute: RouteConfig = {
 
 async function handlerLogic(event: GetOrderEvent): Promise<GetOrderResponse> {
   const orderId = event.pathParameters.id;
-  logger.info('Retrieving order', { orderId });
+  logger.info("Retrieving order", { orderId });
 
   return getOrderResponseSchema.parse({
     statusCode: 200,

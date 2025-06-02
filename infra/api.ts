@@ -1,6 +1,6 @@
+import * as handlers from "../packages/api/src/handlers";
 import { getConfig } from "../sst.config";
 import { getRawRoute } from "./utils";
-import * as handlers from "../packages/api/src/handlers";
 
 const config = getConfig($app.stage);
 
@@ -35,21 +35,22 @@ function addRoute(rawRoute: string, functionArgs: sst.aws.FunctionArgs) {
       ...functionArgs.environment,
     },
   };
+
   return apiGateway.route(rawRoute, actualFunctionArgs);
 }
 
 addRoute(getRawRoute(handlers.getOrderRoute), {
-  handler: "api/src/handlers/orders/getOrder.handler",
+  handler: "packages/api/src/handlers/orders/getOrder.handler",
 });
 
 addRoute(getRawRoute(handlers.postOrderRoute), {
-  handler: "api/src/handlers/orders/postOrder.handler",
+  handler: "packages/api/src/handlers/orders/postOrder.handler",
 });
 
 addRoute(`GET ${config.specialApiPaths.openApiSpec}`, {
-  handler: "api/src/handlers/docs/getOpenApiSpec.handler",
+  handler: "packages/api/src/handlers/docs/getOpenApiSpec.handler",
 });
 
 addRoute(`GET ${config.specialApiPaths.openApiDocs}`, {
-  handler: "api/src/handlers/docs/getOpenApiDocs.handler",
+  handler: "packages/api/src/handlers/docs/getOpenApiDocs.handler",
 });

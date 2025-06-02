@@ -1,4 +1,4 @@
-import { z } from './zodWithOpenApi';
+import { z } from "./zodWithOpenApi";
 
 /**
  * Creates a schema that preprocesses JSON string bodies before validation.
@@ -8,13 +8,14 @@ import { z } from './zodWithOpenApi';
 export function jsonBodySchema<T extends z.ZodType>(schema: T) {
   return z.preprocess(
     (val) => {
-      if (typeof val === 'string') {
+      if (typeof val === "string") {
         try {
           return JSON.parse(val);
-        } catch (e) {
+        } catch {
           return val;
         }
       }
+
       return val;
     },
     schema
@@ -23,10 +24,10 @@ export function jsonBodySchema<T extends z.ZodType>(schema: T) {
 
 export const baseResponseSchema = z.object({
   headers: z.record(z.string()).default({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true',
-    'Access-Control-Allow-Headers': '*',
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Allow-Headers": "*",
   }),
   statusCode: z.number(),
   body: z.string(),
