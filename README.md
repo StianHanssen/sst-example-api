@@ -22,7 +22,7 @@ This repository demonstrates a modern API implementation using SST (Serverless S
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/StianHanssen/sst-example-api
+   git clone git@github.com:StianHanssen/sst-example-api.git
    cd sst-example-api
    ```
 
