@@ -1,6 +1,6 @@
 # SST API Example
 
-This repository demonstrates a modern API implementation using SST (Serverless Stack) on AWS. It showcases best practices for building type-safe APIs with OpenAPI integration.
+This repository demonstrates a modern API implementation using SST (Serverless Stack) on AWS. It showcases (in my opinion) a clean appraoch to building type-safe APIs with OpenAPI integration.
 
 ## Features
 
