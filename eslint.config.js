@@ -10,9 +10,48 @@ import vitestPlugin from 'eslint-plugin-vitest';
 import prettierConfig from 'eslint-config-prettier';
 
 export default [
+  {
+    ignores: [
+      '**/node_modules/**',
+      '**/.sst/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/.next/**',
+      '**/coverage/**',
+      '**/.turbo/**',
+      '**/.vercel/**',
+      '**/.serverless/**',
+      '**/.pnpm-store/**',
+      '**/pnpm-lock.yaml',
+      '**/package-lock.json',
+      '**/yarn.lock',
+      '**/.git/**',
+      '**/.DS_Store',
+    ],
+  },
   eslint.configs.recommended,
   {
-    files: ['packages/**/*.{js,ts,jsx,tsx}', 'infra/**/*.{js,ts}'],
+    files: ['infra/**/*.{js,ts}', 'sst.config.ts'],
+    languageOptions: {
+      globals: {
+        '$config': 'readonly',
+        '$app': 'readonly',
+        '$dev': 'readonly',
+        '$util': 'readonly',
+        '$asset': 'readonly',
+        '$concat': 'readonly',
+        '$interpolate': 'readonly',
+        '$jsonParse': 'readonly',
+        '$jsonStringify': 'readonly',
+        '$resolve': 'readonly',
+        '$transform': 'readonly',
+        'iamEdit': 'readonly',
+        'sst': 'readonly',
+      },
+    },
+  },
+  {
+    files: ['packages/**/*.{js,ts,jsx,tsx}', 'infra/**/*.{js,ts,jsx,tsx}', 'sst.config.ts'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
