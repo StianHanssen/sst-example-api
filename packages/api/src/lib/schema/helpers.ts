@@ -11,10 +11,11 @@ export function jsonBodySchema<T extends z.ZodType>(schema: T) {
       if (typeof val === 'string') {
         try {
           return JSON.parse(val);
-        } catch (e) {
+        } catch {
           return val;
         }
       }
+
       return val;
     },
     schema

@@ -5,6 +5,7 @@ import { logMetrics } from '@aws-lambda-powertools/metrics/middleware';
 import { Tracer } from '@aws-lambda-powertools/tracer';
 import { captureLambdaHandler } from '@aws-lambda-powertools/tracer/middleware';
 import middy from '@middy/core';
+
 import { generateOpenAPI } from '../../lib/openapi/generateOpenApi';
 
 const logger = new Logger();

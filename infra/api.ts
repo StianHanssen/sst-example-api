@@ -1,6 +1,6 @@
+import * as handlers from "../packages/api/src/handlers";
 import { getConfig } from "../sst.config";
 import { getRawRoute } from "./utils";
-import * as handlers from "../packages/api/src/handlers";
 
 const config = getConfig($app.stage);
 
@@ -35,6 +35,7 @@ function addRoute(rawRoute: string, functionArgs: sst.aws.FunctionArgs) {
       ...functionArgs.environment,
     },
   };
+
   return apiGateway.route(rawRoute, actualFunctionArgs);
 }
 
